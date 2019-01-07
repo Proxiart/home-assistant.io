@@ -115,6 +115,14 @@ The Xiaomi IR Remote Platform currently supports two different formats for IR co
 
 A raw command is a command learned from [`remote.xiaomi_miio_learn_command`](/components/remote.xiaomi_miio/#remotexiaomi_miio_learn_command).
 
+You can send this command directly from Hassio's interface using the Service button located at the delevoper tools.
+Make sure you have already added your remote to your configuration.yaml and have restarted Hassio.
+
+You will be able to select ['remote.xiaomi_miio_learn_command'] under service and ['remote.xiaomi_miio_IP_ADDRESS'] as entity.
+Press [Call Service] to execute the command. 
+
+you will now see the Xiaomi IR Remote blink it's blue led and is ready to learn the code of the remote, so go ahead and "turn on" your TV at this point to learn this code. It will show up at your Overview in Hassio as a message. 
+
 A raw command is defined as in the following example:
 `raw:Z6UFANEAAAAjAQAAAwkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAE=`
 with an optional last parameter of frequency:
