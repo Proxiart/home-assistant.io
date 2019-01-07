@@ -135,6 +135,7 @@ The following table shows the units of measurement for each attribute:
 
 <p class='note'>
 As per [python-miio issue 185](https://github.com/rytilahti/python-miio/issues/185) the Android Mi Home app no longer stores the token within the database (it's retrieved from Xiaomi servers from version 5.0.31+). Currently the only known fix is to uninstall, then install a downgraded version of the apk. Apkmirror is a trusted source for older versions of the app. [Mi-Home version 5.0.30](https://www.apkmirror.com/apk/xiaomi-inc/mihome/mihome-5-0-30-release/) is confirmed as working for the following Android methods. Using older version than 5.0.30 is not recommended as it might lack support for some newer devices like the Roborock S50.
+If Mihome keeps crashing on Android, version 5.0.29 is recommended (https://www.apkmirror.com/apk/xiaomi-inc/mihome/mihome-5-0-29-release/) this has been tested on Android models such as Moto G4, Moto G6 and Samsung Galaxy S7. 	
 <br/> <br/>
 The iPhone app still stores the token in the sqlite db as of v4.10.2 (Dec 22, 2018).
 <br/> <br/>
@@ -278,17 +279,36 @@ The following instruction explained an alternativ way, if MiToolKit didn't work.
 - [SQLite Browser](https://sqlitebrowser.org/)
 1. Install an old Version of MiHome (e.g. Mi-Home version 5.0.30) on your Android-Device
 2. Open MiHome, log-in and add your devices
+2a. If the devices don't show up as selectable in the list, be sure to change the region to China Mainland. 
 3. Enable USB-Debugging on your Android
+	Go to settings
+	Information about the phone (Should be all the way down)
+	Find the "buildnumber/version" and tap that 7 times in a row.
+	Now under settings you will find "Developers options"
+	Activate USB-Debugging
+	Plug the Android device to your computer with a USB-cable.
 4. Create a backup from your MiHome App, by using adb
+	On a Windows machine open CMD (Windows key + r) type 'CMD', press 'Enter'
+	Browse to the folder using
+	```bash
+	cd (full path) eg. C:\Downloads\ADB\
+	```
+	Make sure the Android device is unlocked and enter the following command
 	```bash
 	adb backup com.xiaomi.smarthome
 	```
 	Now the backup App opens on you Android-Device. You don't need to set a password, just click save.
-5. Extract the backup-file with android-backup-extractor
+5. Copy the now created file 'backup.ab' in Windows from the ADB folder to Android Backup Extractor folder which contains the abe.jar file.	
+5. Extract the backup-file with android-backup-extractor using CMD
+	Browse to the folder using 
+	```bash
+	cd (full path) eg. C:\Downloads\Android_extractor\
+	```
+	Enter the following command
 	```bash
 	java -jar abe.jar unpack backup.ab backup.tar
 	```
-	After that, you kann open the file with WinRaR or what ever you like.
+	After that, you can open the file with WinRaR or what ever you like.
 6. Go to \apps\com.xiaomi.smarthome\db
 7. Open miio2.db with SQLite Browser
 8. You can find your device tokens in "devicerecord" table
